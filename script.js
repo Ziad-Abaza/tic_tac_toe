@@ -76,18 +76,42 @@ function game(cellId) {
 function makeRandomMoveForO() {
   if (gameOver) return;
 
-  const strategicCombo = findStrategicCombination();
-  if (strategicCombo) {
-    playStrategicMove(strategicCombo);
-  } else {
-    playRandomMove();
+  for (let i = 0; i < 9; i++) {
+    squares[i] = document.getElementById(`item${i + 1}`).textContent;
   }
+
+  const winMove = findBestMove("O");
+  if (winMove !== null) return executeMove(winMove);
+
+  const blockMove = findBestMove("X");
+  if (blockMove !== null) return executeMove(blockMove);
+
+  if (
+    squares[4] === "O" &&
+    ((squares[0] === "X" && squares[8] === "X") ||
+      (squares[2] === "X" && squares[6] === "X"))
+  ) {
+    const sides = [1, 3, 5, 7];
+    const emptySides = sides.filter((i) => !squares[i]);
+    if (emptySides.length > 0) return executeMove(emptySides[0]);
+  }
+
+  if (!squares[4]) return executeMove(4);
+
+  const corners = [0, 2, 6, 8];
+  const emptyCorners = corners.filter((i) => !squares[i]);
+  if (emptyCorners.length > 0)
+    return executeMove(
+      emptyCorners[Math.floor(Math.random() * emptyCorners.length)]
+    );
+
+  playRandomMove();
 
   if (winner()) return;
   turn = "X";
 }
 
-function findStrategicCombination() {
+function findBestMove(player) {
   const winCombos = [
     [0, 1, 2],
     [3, 4, 5],
@@ -100,34 +124,21 @@ function findStrategicCombination() {
   ];
 
   for (const combo of winCombos) {
-    const [a, b, c] = combo;
-    const oCount = [squares[a], squares[b], squares[c]].filter(
-      (x) => x === "O"
-    ).length;
-    const empty = combo.filter((i) => !squares[i]).length;
-    if (oCount === 2 && empty === 1) return combo;
-  }
+    const values = combo.map((i) => squares[i]);
+    const playerCount = values.filter((v) => v === player).length;
+    const emptyCount = values.filter((v) => v === "").length;
 
-  for (const combo of winCombos) {
-    const [a, b, c] = combo;
-    const xCount = [squares[a], squares[b], squares[c]].filter(
-      (x) => x === "X"
-    ).length;
-    const empty = combo.filter((i) => !squares[i]).length;
-    if (xCount === 2 && empty === 1) return combo;
+    if (playerCount === 2 && emptyCount === 1) {
+      return combo.find((i) => !squares[i]);
+    }
   }
-
   return null;
 }
 
-function playStrategicMove(combo) {
-  for (const index of combo) {
-    const cell = document.getElementById(`item${index + 1}`);
-    if (!cell.textContent) {
-      cell.textContent = "O";
-      break;
-    }
-  }
+function executeMove(index) {
+  const cell = document.getElementById(`item${index + 1}`);
+  cell.textContent = "O";
+  if (!winner()) turn = "X";
 }
 
 function playRandomMove() {
