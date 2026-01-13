@@ -1,7 +1,15 @@
 let title = document.querySelector(".title");
+let statusElement = document.getElementById("status");
 let squares = [];
 let turn = "X";
 let gameOver = false;
+
+function updateStatus() {
+    statusElement.textContent = `Player ${turn}'s turn`;
+}
+
+// Initialize status
+updateStatus();
 
 function TheEnd(winner, winningLine) {
   gameOver = true;
@@ -67,9 +75,11 @@ function game(cellId) {
   if (cell.textContent !== "") return;
 
   cell.textContent = "X";
+  cell.setAttribute('data-value', 'X');
   if (winner()) return;
 
   turn = "O";
+  updateStatus();
   setTimeout(makeRandomMoveForO, 500);
 }
 
@@ -138,7 +148,11 @@ function findBestMove(player) {
 function executeMove(index) {
   const cell = document.getElementById(`item${index + 1}`);
   cell.textContent = "O";
-  if (!winner()) turn = "X";
+  cell.setAttribute('data-value', 'O');
+  if (!winner()) {
+      turn = "X";
+      updateStatus();
+  }
 }
 
 function playRandomMove() {
@@ -150,6 +164,9 @@ function playRandomMove() {
   if (emptyCells.length) {
     const randomIndex =
       emptyCells[Math.floor(Math.random() * emptyCells.length)];
-    document.getElementById(`item${randomIndex + 1}`).textContent = "O";
+    const cell = document.getElementById(`item${randomIndex + 1}`);
+    cell.textContent = "O";
+    cell.setAttribute('data-value', 'O');
+    updateStatus();
   }
 }
