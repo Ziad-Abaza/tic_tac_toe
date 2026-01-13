@@ -89,12 +89,6 @@ In future experiments, the same game environment can be reused to train an RL ag
 
 ---
 
-## Notes
-
-This project is intentionally simple and educational. It is meant to be read, modified, and experimented with — not to claim advanced AI capabilities.
-
----
-
 ## Contact
 
 **Ziad Hassan Abaza**
