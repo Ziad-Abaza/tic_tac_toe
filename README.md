@@ -1,49 +1,67 @@
 # Tic Tac Toe Game
 
-This repository contains a Tic Tac Toe game implemented with a **Rule-Based Intelligent Agent**. The project focuses on decision-making logic rather than machine learning, demonstrating how an agent can appear intelligent through well-defined rules and heuristics.
+This project started as a **personal experiment and a bit of fun** while exploring how simple logic can create intelligent-looking behavior in games. It is a Tic Tac Toe game built around a **Rule-Based Intelligent Agent**, without using machine learning or training.
+
+At the same time, this project acts as a stepping stone for my current learning path in **Reinforcement Learning (RL)**. The idea was to first understand and enjoy building decision-making logic manually, before later reusing or comparing it with an RL agent trained on the same environment.
 
 ---
 
 ## Project Overview
 
-The game allows a human player (X) to play against an automated opponent (O). The opponent does not learn from data or past games; instead, it relies on predefined logical rules to analyze the game state and choose actions. This makes the system a classic example of a **rule-based intelligent agent**, commonly used in simple games and educational demonstrations of decision-making systems.
+The game allows a human player (X) to play against an automated opponent (O). The opponent is not adaptive and does not learn from experience. Instead, it follows a clear set of predefined rules that analyze the board and choose reasonable actions.
+
+This approach reflects how many classic games and early AI systems were built: by encoding **human reasoning into rules**, rather than relying on data-driven learning.
 
 ---
 
-## Conceptual Decision-Making Logic
+## Conceptual Decision-Making Logic (No Code)
 
-The intelligent behavior of player **O** is based entirely on reasoning and strategy rather than code-level techniques or training. Conceptually, the agent operates as follows:
+The behavior of player **O** is entirely driven by logical reasoning. Conceptually, the agent thinks in the following way:
 
-### 1. State Analysis
+### 1. Understanding the Current State
 
-The agent continuously evaluates the current board configuration, identifying which cells are occupied, which are free, and how close either player is to forming a winning line.
+Before making a move, the agent observes the board: which cells are empty, which are occupied, and whether any player is close to winning. The board itself represents the full state of the game.
 
-### 2. Goal-Oriented Reasoning
+### 2. Clear Priorities
 
-The agent prioritizes outcomes using a clear hierarchy of objectives:
+The agent follows a simple but effective priority system:
 
-* **Win if possible**: If there is a move that immediately results in a win, the agent takes it.
-* **Prevent loss**: If the opponent is one move away from winning, the agent blocks that move.
-* **Strategic positioning**: When no immediate threat or win exists, the agent chooses positions that statistically improve its chances of winning (such as controlling the center or corners).
-* **Fallback behavior**: If no strategic advantage is available, the agent selects a valid move to continue the game.
+* **Finish the game if possible**: If a winning move exists, it is taken immediately.
+* **Avoid losing**: If the opponent is about to win, the agent blocks that move.
+* **Improve future chances**: If there is no immediate threat, the agent chooses positions that are strategically stronger (such as the center or corners).
+* **Keep the game going**: When no clear advantage exists, the agent plays a valid move to maintain progress.
 
-### 3. Opponent Strategy Evaluation
+### 3. Handling the Opponent
 
-Rather than predicting future moves through simulation or learning, the agent recognizes known tactical patterns (such as forks or diagonal traps) and counters them using predefined defensive rules. This gives the impression of strategic awareness without adaptive intelligence.
+Rather than predicting many moves ahead, the agent reacts to known patterns. It recognizes simple tactical situations (like potential traps or alignments) and responds using predefined defensive logic. This creates the feeling of strategy without any form of learning or simulation.
 
-### 4. Deterministic Yet Flexible Behavior
+### 4. Predictable but Not Boring
 
-Most decisions follow deterministic logic, ensuring consistent and rational responses. In non-critical situations, limited randomness is introduced to avoid repetitive play patterns.
+Most decisions are deterministic, ensuring consistent behavior. In non-critical situations, limited randomness is allowed so that the game does not always unfold in exactly the same way.
+
+---
+
+## Why Rule-Based and Not AI Learning?
+
+This project is **not a machine-learning AI**. It is best described as a **Rule-Based Intelligent Agent**.
+
+The main goals were:
+
+* To enjoy building game logic by hand
+* To better understand decision-making systems
+* To create a solid baseline that can later be compared with a Reinforcement Learning agent
+
+In future experiments, the same game environment can be reused to train an RL agent and compare how learned behavior differs from handcrafted logic.
 
 ---
 
 ## Features
 
-* **Human vs Intelligent Agent gameplay**
-* **Strategic automated opponent (O)** based on rules and heuristics
-* **Win, loss, and draw detection**
-* **Clear visual feedback** for game outcomes
-* **Simple and intuitive 3×3 grid interface**
+* Human vs Rule-Based Agent gameplay
+* Logical, strategy-driven opponent (O)
+* Win, loss, and draw detection
+* Visual feedback for game outcomes
+* Simple and intuitive 3×3 grid interface
 
 ---
 
@@ -52,42 +70,38 @@ Most decisions follow deterministic logic, ensuring consistent and rational resp
 1. Open the `index.html` file in your browser.
 2. The game starts with player **X** (human).
 3. Click on an empty square to make a move.
-4. The intelligent agent (**O**) responds automatically.
-5. The game ends when there is a win or a draw.
+4. Player **O** responds automatically using rule-based logic.
+5. The game ends with a win or a draw.
 
 ---
 
 ## Project Structure
 
-* `index.html` — Defines the game layout and structure
-* `styles.css` — Controls the visual design and layout
-* `script.js` — Implements the rule-based decision logic and game flow
+* `index.html` — Game layout and structure
+* `styles.css` — Visual styling
+* `script.js` — Game flow and rule-based decision logic
 
 ---
 
-## Example Screenshot
+## Screenshot
 
 ![Tic Tac Toe](https://github.com/Ziad-Abaza/tic_tac_toe/blob/main/screenshots/screenshot.jpeg)
 
 ---
 
-## How to Contribute
+## Notes
 
-Contributions are welcome. You may fork the repository and enhance the logic, improve the UI, or experiment with alternative decision strategies.
+This project is intentionally simple and educational. It is meant to be read, modified, and experimented with — not to claim advanced AI capabilities.
 
 ---
 
 ## Contact
 
-For questions or feedback:
+**Ziad Hassan Abaza**
 
-* **Ziad Hassan Abaza**
+* GitHub: [https://github.com/Ziad-Abaza](https://github.com/Ziad-Abaza)
+* Email: [zeyad.h.abaza@gmail.com](mailto:zeyad.h.abaza@gmail.com)
 
-  * GitHub: [https://github.com/Ziad-Abaza](https://github.com/Ziad-Abaza)
-  * Email: [zeyad.h.abaza@gmail.com](mailto:zeyad.h.abaza@gmail.com)
+## Enjoy!
 
----
-
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for det
+Thank you for playing! and have a great day :)
